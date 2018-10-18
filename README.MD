@@ -7,6 +7,7 @@ Based on a previous PnP for [2R1B](https://github.com/fergul/2R1B_PnP) I created
 
 There are 2 pdf versions available, one with backs and one without. In hindsight, the current asymmetrical back design ([Wolf](https://thenounproject.com/term/wolf/16473/) by Lee Mette from the Noun Project) makes it easier to notice if your card has been messed with, hence the blank version - bonus, there's no alignment issues when printing back/front using no duplex home printers.
 
+![Example Cards](/img/example_cards.png)
 
 Custom versions
 ---------------
