@@ -1,0 +1,110 @@
+\documentclass[a4paper, landscape]{article}
+
+% Used for wolf svg logo
+\usepackage{pstricks}
+
+\input{include/cardLibs.tex}
+\input{include/cardColours.tex}
+\input{include/cardStyles.tex}
+
+% Shorthand commands for the different factions
+\newcommand{\townsfolk}[3]{\materialcard{#1}{#2}{#3}{Townsfolk}}
+\newcommand{\selfish}[3]{\materialcard{#1}{#2}{#3}{Selfish}}
+\newcommand{\werewolf}[3]{\materialcard{#1}{#2}{#3}{Werewolves}}
+
+% Some stock text for the repeated cards
+\newcommand{\villagerDescription}{You are a weak, feeble, powerless villager, you're only hope is to convince others of your innocence. \par Many will claim to be you.\\ Good luck!}
+\newcommand{\werewolfDescription}{Wake-up in the night to find your pack and work together to survive the day.\par If you find that you're a lonewolf, take a peek at a card from the centre during the night.}
+
+\newcommand{\cardpage}[8]{\begin{center}#1\hspace{2mm}#2\hspace{2mm}#3\hspace{2mm}#4\\\vspace{5mm}#5\hspace{2mm}#6\hspace{2mm}#7\hspace{2mm}#8\end{center}}
+
+\newcommand{\reversecardpage}{\cardpage{\cardreverse}{\cardreverse}{\cardreverse}{\cardreverse}{\cardreverse}{\cardreverse}{\cardreverse}{\cardreverse}}
+
+\begin{document}
+\pagestyle{empty}
+% Syntax \affiliationName{ROLE_NAME}{HINT/JOKE}{ROLE_DESCRIPTION}
+\cardpage{
+\werewolf{Werewolf}
+{Survive the day!}
+{\werewolfDescription}{Yes}}
+%
+{\werewolf{Werewolf}
+{Survive the day!}
+{\werewolfDescription}{Yes}}
+%
+{\townsfolk{Villager}
+{Hunt the wolves!}
+{\villagerDescription}{No}}
+%
+{\townsfolk{Villager}
+{Hunt the wolves!}
+{\villagerDescription}{No}}
+%
+{\townsfolk{Seer}
+{What do your elf eyes see?}
+{Wake up in the night to view one other player's card, or two cards from the centre.
+
+Choose the time to reveal what you saw wisely...}{Yes}}
+%
+{\townsfolk{Robber}
+{Take what you can get.}
+{You may swap your card for any other player's card; you can only view your new card after the swap. No take-backs!
+
+You must assume the new role during the day phase.}{Yes}}
+%
+{\townsfolk{Trouble-maker}
+{Up to no good!}
+{You may swap any two players' cards without peeking, except your own.
+
+Those players will assume those roles during the day, \\unbeknownst to themselves.}{Yes}}
+%
+{\townsfolk{Drunk}
+{I'm not drunk, I swear!}
+{You must swap your card with a centre card, without looking at your new role.}{Yes}}
+
+\newpage
+\reversecardpage
+
+\newpage
+\cardpage{%
+\townsfolk{Insomniac}
+{Can't stay asleep.}
+{Wake up last in the night to see if your card is still the same, if not, you assume your new role in the day.}{Yes}}
+%
+{\townsfolk{Mason}
+{A secret bond.}
+{Wake up in the night to find your fellow mason, you know you're both good, now convince the others...}{Yes}}
+%
+{\townsfolk{Mason}
+{A secret bond.}
+{Wake up in the night to find your fellow mason, you know you're both good, now convince the others...}{Yes}}
+%
+{\selfish{Tanner}
+{There's no `I' in team!}
+{Your sole goal is to get yourself killed, you play for no team other than yourself. 
+
+Play it carefully, otherwise the townsfolk may catch on to your scheming.}{No}}
+%
+{\townsfolk{Hunter}
+{Take `em down with you!}
+{If you are killed during the vote at the end of the day, whomever you are pointing to dies as well.}{No}}
+%
+{\townsfolk{Doppelgänger}
+{Oh you chameleon, you!}
+{You wake up first, view another player's card and assume their role, without exchanging cards.}{Yes}}
+%
+{\werewolf{Minion}
+{You serve the darkness.}
+{You are team werewolf, but they don't know who you are. When you wake up, look out for those furry thumbs. 
+
+Your goal is to keep the werewolves alive at all costs, your life is worthless.}{Yes}}
+%
+{\townsfolk{Villager}
+{Hunt the wolves!}
+{\villagerDescription}{No}}
+%
+
+\newpage
+\reversecardpage
+
+\end{document}

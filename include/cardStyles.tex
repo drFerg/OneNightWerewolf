@@ -1,0 +1,103 @@
+
+\pgfmathsetmacro{\cardwidth}{6}
+\pgfmathsetmacro{\cardheight}{9}
+
+\pgfmathsetmacro{\stripwidth}{1.2}
+\pgfmathsetmacro{\strippadding}{0.1}
+\pgfmathsetmacro{\textpadding}{0.15}
+\pgfmathsetmacro{\ruleheight}{0.3}
+
+\newcommand{\carddebug}{
+    \draw [step=0.2,help lines] (0,0) grid (\cardwidth,\cardheight);
+}
+
+\def\shapeCard{(0,0) rectangle (\cardwidth,\cardheight)}
+\tikzset{
+    %   runde Ecken für die Karten
+    cardcorners/.style={
+        rounded corners=0.2cm
+    },
+    %   runde Ecken für die "Fähnchen"
+    elementcorners/.style={
+        rounded corners=0.1cm
+    },
+    %   Schlagschatten für die "Fähnchen"
+    stripshadow/.style={
+        drop shadow={
+            opacity=.5,
+            shadow,
+            color=black
+        }
+    },
+    %   Style für die "Fähnchen"
+    strip/.style={
+        elementcorners,
+        stripshadow
+    },
+    %   Bild für das Kartenmotiv
+    cardimage/.style={
+        path picture={
+            \node[below=-1.5mm] at (0.5*\cardwidth,\cardheight) {
+                \includegraphics[width=\imagewidth cm]{#1}
+            };
+        }
+    },
+}
+
+\newcommand{\cardborder}{
+    \draw[lightgray,cardcorners] \shapeCard;
+}
+
+\newcommand{\cardreverse}{
+  \begin{tikzpicture}
+  \node [scale=2.5] at ({0.5*\cardwidth}, 0.5*\cardheight) {
+  \input{include/wolf}};
+  % \cardborder
+  \node[anchor=north west, align=left,\backgroundfontcolor,font=\small] at ({0.4}, 1.4){
+    \\{\normalfont\mdseries \footnotesize Wolf by Lee Mette from the Noun Project}};
+  \draw[white,cardcorners] \shapeCard;
+  \end{tikzpicture}
+}
+
+\newcommand{\materialcard}[5]{
+\begin{tikzpicture}
+\begin{scope}[even odd rule]
+% Draw Card shape and background
+  \cardborder
+  \clip[cardcorners] \shapeCard;
+  \fill[\blackbackgroundcolor] (0,0) rectangle (\cardwidth,\cardheight);%
+  % \carddebug
+% Role subtitle
+  \node[anchor=south west,\backgroundfontcolor, align=left] at ({0.4}, \cardheight-0.9) {{{\normalfont\mdseries \small You are a}}};%
+% Role title
+  \node[anchor=south west,\backgroundfontcolor, align=left] at ({0.4}, \cardheight-1.5) {{\uppercase{\normalfont\bfseries\itshape \LARGE #1}}};%
+% Seperator line
+  \draw [very thin, materialgrey] (0.4,\cardheight-1.6) -- (\cardwidth-0.4,\cardheight-1.6);
+% Role description title
+  \node[anchor=north west, align=left,\backgroundfontcolor,font=\normalsize, text width=(\cardwidth - 1)*1cm] at ({0.4}, \cardheight-2){
+      \normalfont\bfseries #2\\
+    };%
+% Role description content
+  \node[anchor=north west, align=left,\backgroundfontcolor,font=\normalsize, text width=(\cardwidth - 0.9)*1cm] at ({0.4}, \cardheight-2.6){
+    \setlength{\parskip}{1em}\normalfont\mdseries #3%
+  };%
+% Seperator line
+  \draw [very thin, materialgrey] (0.4,1.6) -- (\cardwidth-0.4,1.6);
+% Team Info
+  \node[anchor=north west, align=left,\backgroundfontcolor,font=\small] at ({0.4}, 1.4){
+    {\normalfont\bfseries Allegiance}\\{\normalfont\mdseries #4}};
+% Wake Info
+  \node[anchor=north east, align=left,\backgroundfontcolor,font=\small] at ({\cardwidth-0.4}, 1.4){
+    {\normalfont\bfseries Wake at night?}\\{\normalfont\mdseries #5}
+      };%
+\end{scope}
+\end{tikzpicture}
+}
+
+
+\newcommand{\condition}[1]{
+``#1''
+}
+\newcommand{\character}[1]{
+\textbf{#1}
+}
